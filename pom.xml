@@ -12,22 +12,23 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
     <spark.version>3.1.1</spark.version>
-    <scala.version>2.12.13</scala.version>
+    <scala.majorVersion>2.12</scala.majorVersion>
+    <scala.version>${scala.majorVersion}.10</scala.version>
   </properties>
   <dependencies>
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-core_2.12</artifactId>
+      <artifactId>spark-core_${scala.majorVersion}</artifactId>
       <version>${spark.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-sql_2.12</artifactId>
+      <artifactId>spark-sql_${scala.majorVersion}</artifactId>
       <version>${spark.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-mllib_2.12</artifactId>
+      <artifactId>spark-mllib_${scala.majorVersion}</artifactId>
       <version>${spark.version}</version>
     </dependency>
   </dependencies>
