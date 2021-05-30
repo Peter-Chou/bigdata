@@ -32,7 +32,6 @@
       <version>${spark.version}</version>
     </dependency>
   </dependencies>
-
   <build>
     <sourceDirectory>src/main/scala</sourceDirectory>
     <testSourceDirectory>src/test/scala</testSourceDirectory>
@@ -41,37 +40,34 @@
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
         <version>4.5.2</version>
-          <executions>
-            <execution>
-              <id>scala-compile-first</id>
-              <goals>
-                <goal>compile</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>scala-test-compile-first</id>
-              <goals>
-                <goal>testCompile</goal>
-              </goals>
-            </execution>
-          </executions>
+        <configuration>
+          <launchers>
+            <launcher>
+              <id>WordCount</id>
+              <mainClass>peter.playground.wordcount.WordCount</mainClass>
+            </launcher>
+            <!-- you could define other launcher -->
+          </launchers>
+        </configuration>
       </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.1</version>
-          <configuration>
-            <source>${java.version}</source>
-            <target>${java.version}</target>
-            <skipMain>true</skipMain> <!-- skip compile -->
-            <skip>true</skip> <!-- skip testCompile -->
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0-M5</version>
-        </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <skipMain>true</skipMain>
+          <!-- skip compile -->
+          <skip>true</skip>
+          <!-- skip testCompile -->
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version>
+      </plugin>
     </plugins>
   </build>
 </project>
