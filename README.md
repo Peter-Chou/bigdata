@@ -5,5 +5,5 @@ mvn scala:compile
 ```
 
 ``` bash
-mvn scala:run -Dlauncher=WordCount
+mvn scala:run -DmainClass=peter.playground.wordcount.WordCount
 ```
