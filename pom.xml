@@ -40,15 +40,6 @@
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
         <version>4.5.2</version>
-        <configuration>
-          <launchers>
-            <launcher>
-              <id>WordCount</id>
-              <mainClass>peter.playground.wordcount.WordCount</mainClass>
-            </launcher>
-            <!-- you could define other launcher -->
-          </launchers>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
