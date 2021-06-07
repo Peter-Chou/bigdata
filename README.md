@@ -8,6 +8,7 @@ mvn scala:compile
 
 ``` bash
 mvn scala:run -DmainClass=peter.playground.examples.wordcount.WordCount
+mvn scala:run -DmainClass=peter.playground.examples.agentlog.AgentLog
 ```
 
 ## transformations
