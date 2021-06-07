@@ -23,12 +23,18 @@ object AgentLog {
 
     // reduceRDD: ((province, ad), view_num)
     val reduceRDD = mapRDD.reduceByKey(_ + _)
-    val groupRDD = reduceRDD.groupBy(_._1._1)
-    val sortedRDD =
-      groupRDD.mapValues(iter => iter.toList.sortBy(_._2).reverse.takeRight(3))
-    val flatRDD = sortedRDD.flatMap(_._2)
-    val rdd = flatRDD.map(item => (item._1._1, item._1._2, item._2))
-    rdd.collect().foreach(println)
+    // reduceRDD: (province, (ad, view_num))
+    val caseRDD = reduceRDD.map { case ((prov, ad), sum) => (prov, (ad, sum)) }
+    val groupRDD = caseRDD.groupByKey()
+    val resultRDD = groupRDD.mapValues(iter =>
+      iter.toList.sortBy(_._2)(Ordering.Int.reverse).take(3)
+    )
+    // val groupRDD = reduceRDD.groupBy(_._1._1)
+    // val sortedRDD =
+    //   groupRDD.mapValues(iter => iter.toList.sortBy(_._2).reverse.takeRight(3))
+    // val flatRDD = sortedRDD.flatMap(_._2)
+    // val rdd = flatRDD.map(item => (item._1._1, item._1._2, item._2))
+    resultRDD.collect().foreach(println)
     sc.stop()
 
   }

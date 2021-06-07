@@ -52,3 +52,4 @@ project/metals.sbt
 .bloop/
 .ammonite/
 metals.sbt
+!/data/agent/agent.log
