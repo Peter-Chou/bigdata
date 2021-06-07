@@ -16,6 +16,8 @@ mvn scala:run -DmainClass=peter.playground.examples.agentlog.AgentLog
 ``` bash
 # sample
 mvn scala:run -DmainClass=peter.playground.transformations.sampler.Sampler
+# sortby
+mvn scala:run -DmainClass=peter.playground.transformations.sortby.SortBy
 # reduceByKey
 mvn scala:run -DmainClass=peter.playground.transformations.reduceByKey.ReduceByKey
 # aggregateByKey
