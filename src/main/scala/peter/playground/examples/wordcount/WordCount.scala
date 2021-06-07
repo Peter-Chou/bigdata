@@ -1,4 +1,4 @@
-package peter.playground.wordcount
+package peter.playground.examples.wordcount
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
