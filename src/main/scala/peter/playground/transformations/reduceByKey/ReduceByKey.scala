@@ -19,5 +19,7 @@ object ReduceByKey {
     })
 
     reduceRDD.collect().foreach(println)
+
+    sc.stop()
   }
 }

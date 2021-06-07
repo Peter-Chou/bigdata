@@ -12,4 +12,5 @@ object Sampler {
   val rdd: RDD[Int] = sc.makeRDD(List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
   rdd.sample(false, 0.4, 1024).collect().foreach(println)
 
+  sc.stop()
 }
