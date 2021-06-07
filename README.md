@@ -4,7 +4,7 @@
 mvn scala:compile
 ```
 
-# examples
+## examples
 
 ``` bash
 mvn scala:run -DmainClass=peter.playground.examples.wordcount.WordCount
