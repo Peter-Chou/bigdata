@@ -28,4 +28,6 @@ mvn scala:run -DmainClass=peter.playground.transformations.join.Join
 mvn scala:run -DmainClass=peter.playground.transformations.leftJoin.LeftJoin
 # cogroup
 mvn scala:run -DmainClass=peter.playground.transformations.cogroup.CoGroup
+# persist
+mvn scala:run -DmainClass=peter.playground.transformations.persist.Persist
 ```

@@ -53,3 +53,4 @@ project/metals.sbt
 .ammonite/
 metals.sbt
 !/data/agent/agent.log
+ckpt/
