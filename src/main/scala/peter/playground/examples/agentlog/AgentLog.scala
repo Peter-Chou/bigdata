@@ -29,11 +29,6 @@ object AgentLog {
     val resultRDD = groupRDD.mapValues(iter =>
       iter.toList.sortBy(_._2)(Ordering.Int.reverse).take(3)
     )
-    // val groupRDD = reduceRDD.groupBy(_._1._1)
-    // val sortedRDD =
-    //   groupRDD.mapValues(iter => iter.toList.sortBy(_._2).reverse.takeRight(3))
-    // val flatRDD = sortedRDD.flatMap(_._2)
-    // val rdd = flatRDD.map(item => (item._1._1, item._1._2, item._2))
     resultRDD.collect().foreach(println)
     sc.stop()
 
