@@ -33,3 +33,8 @@ mvn scala:run -DmainClass=peter.playground.transformations.persist.Persist
 # partitionBy
 mvn scala:run -DmainClass=peter.playground.transformations.partitioner.Partitioner
 ```
+
+``` bash
+mvn scala:run -DmainClass=peter.playground.accumulator.longAccumulator.LongAccumulator
+mvn scala:run -DmainClass=peter.playground.accumulator.customAccumulator.CustomAccumulator
+```
