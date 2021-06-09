@@ -37,4 +37,5 @@ mvn scala:run -DmainClass=peter.playground.rdd.partitioner.Partitioner
 ``` bash
 mvn scala:run -DmainClass=peter.playground.accumulator.longAccumulator.LongAccumulator
 mvn scala:run -DmainClass=peter.playground.accumulator.customAccumulator.CustomAccumulator
+mvn scala:run -DmainClass=peter.playground.broadcast.Broadcast
 ```
