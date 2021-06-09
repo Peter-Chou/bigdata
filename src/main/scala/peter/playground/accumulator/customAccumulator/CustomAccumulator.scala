@@ -9,7 +9,7 @@ import scala.collection.mutable
 object CustomAccumulator {
   def main(args: Array[String]) = {
     val conf: SparkConf =
-      new SparkConf().setMaster("local[*]").setAppName("Accumulator")
+      new SparkConf().setMaster("local[*]").setAppName("CustomAccumulator")
     val sc: SparkContext = new SparkContext(conf)
     val rdd: RDD[String] = sc.makeRDD(List("hello", "spark", "scala", "hello"))
 

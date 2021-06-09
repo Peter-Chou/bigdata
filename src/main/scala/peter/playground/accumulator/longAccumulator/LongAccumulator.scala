@@ -10,7 +10,7 @@ import org.apache.spark.util.LongAccumulator
 object LongAccumulator {
   def main(args: Array[String]) = {
     val conf: SparkConf =
-      new SparkConf().setMaster("local[*]").setAppName("Accumulator")
+      new SparkConf().setMaster("local[*]").setAppName("LongAccumulator")
     val sc: SparkContext = new SparkContext(conf)
     val rdd: RDD[Int] = sc.makeRDD(List(1, 2, 3, 4))
 
