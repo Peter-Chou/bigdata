@@ -1,4 +1,4 @@
-package peter.playground.transformations.aggregateByKey
+package peter.playground.rdd.aggregateByKey
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext

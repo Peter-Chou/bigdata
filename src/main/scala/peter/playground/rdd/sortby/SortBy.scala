@@ -1,4 +1,4 @@
-package peter.playground.transformations.sortby
+package peter.playground.rdd.sortby
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext

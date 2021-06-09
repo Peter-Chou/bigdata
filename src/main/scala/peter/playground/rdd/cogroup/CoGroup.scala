@@ -1,4 +1,4 @@
-package peter.playground.transformations.cogroup
+package peter.playground.rdd.cogroup
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext

@@ -1,4 +1,4 @@
-package peter.playground.transformations.leftJoin
+package peter.playground.rdd.leftJoin
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext

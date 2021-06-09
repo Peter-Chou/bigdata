@@ -1,4 +1,4 @@
-package peter.playground.transformations.persist
+package peter.playground.rdd.persist
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext

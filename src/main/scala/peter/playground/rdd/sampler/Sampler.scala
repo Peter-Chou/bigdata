@@ -1,4 +1,4 @@
-package peter.playground.transformations.sample
+package peter.playground.rdd.sample
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext

@@ -1,4 +1,4 @@
-package peter.playground.transformations.partitioner
+package peter.playground.rdd.partitioner
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext

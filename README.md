@@ -15,23 +15,23 @@ mvn scala:run -DmainClass=peter.playground.examples.agentlog.AgentLog
 
 ``` bash
 # sample
-mvn scala:run -DmainClass=peter.playground.transformations.sampler.Sampler
+mvn scala:run -DmainClass=peter.playground.rdd.sampler.Sampler
 # sortby
-mvn scala:run -DmainClass=peter.playground.transformations.sortby.SortBy
+mvn scala:run -DmainClass=peter.playground.rdd.sortby.SortBy
 # reduceByKey
-mvn scala:run -DmainClass=peter.playground.transformations.reduceByKey.ReduceByKey
+mvn scala:run -DmainClass=peter.playground.rdd.reduceByKey.ReduceByKey
 # aggregateByKey
-mvn scala:run -DmainClass=peter.playground.transformations.aggregateByKey.AggregateByKey
+mvn scala:run -DmainClass=peter.playground.rdd.aggregateByKey.AggregateByKey
 # join
-mvn scala:run -DmainClass=peter.playground.transformations.join.Join
+mvn scala:run -DmainClass=peter.playground.rdd.join.Join
 # left join
-mvn scala:run -DmainClass=peter.playground.transformations.leftJoin.LeftJoin
+mvn scala:run -DmainClass=peter.playground.rdd.leftJoin.LeftJoin
 # cogroup
-mvn scala:run -DmainClass=peter.playground.transformations.cogroup.CoGroup
+mvn scala:run -DmainClass=peter.playground.rdd.cogroup.CoGroup
 # persist
-mvn scala:run -DmainClass=peter.playground.transformations.persist.Persist
+mvn scala:run -DmainClass=peter.playground.rdd.persist.Persist
 # partitionBy
-mvn scala:run -DmainClass=peter.playground.transformations.partitioner.Partitioner
+mvn scala:run -DmainClass=peter.playground.rdd.partitioner.Partitioner
 ```
 
 ``` bash

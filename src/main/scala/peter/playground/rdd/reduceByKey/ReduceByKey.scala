@@ -1,4 +1,4 @@
-package peter.playground.transformations.reduceByKey
+package peter.playground.rdd.reduceByKey
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
