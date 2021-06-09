@@ -54,3 +54,4 @@ project/metals.sbt
 metals.sbt
 !/data/agent/agent.log
 ckpt/
+output/

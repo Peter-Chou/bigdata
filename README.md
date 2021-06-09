@@ -30,4 +30,6 @@ mvn scala:run -DmainClass=peter.playground.transformations.leftJoin.LeftJoin
 mvn scala:run -DmainClass=peter.playground.transformations.cogroup.CoGroup
 # persist
 mvn scala:run -DmainClass=peter.playground.transformations.persist.Persist
+# partitionBy
+mvn scala:run -DmainClass=peter.playground.transformations.partitioner.Partitioner
 ```
