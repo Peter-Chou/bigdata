@@ -2,8 +2,10 @@ package peter.playground.examples.topk
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
-import spire.syntax.group
+import org.apache.spark.rdd.RDD
 import org.apache.spark.util.AccumulatorV2
+import spire.syntax.group
+
 import scala.collection.mutable
 
 // 按照每个品类的点击、下单、支付的量来统计热门品类
@@ -12,7 +14,6 @@ import scala.collection.mutable
 
 object Topk {
   def main(args: Array[String]): Unit = {
-    // top 10 热门品类
     val conf: SparkConf =
       new SparkConf().setMaster("local[*]").setAppName("top10")
     val sc: SparkContext = new SparkContext(conf)
@@ -21,8 +22,52 @@ object Topk {
     sc.register(acc, "topkAcc")
 
     val fileRDD = sc.textFile("data/userAction/user_visit_action.txt")
+    fileRDD.cache()
 
-    fileRDD.foreach(line => {
+    val categories = topkCategory(fileRDD, acc)
+    println("categories: \n")
+    categories.foreach(println)
+    val top10CatNames = categories.map(_.cid)
+
+    // Top10热门类别中的Top10 Session统计
+    val filterRDD = fileRDD.filter(line => {
+      val data = line.split("_")
+      if (data(6) != "-1") {
+        top10CatNames.contains(data(6))
+      } else {
+        false
+      }
+    })
+    val reduceRDD = filterRDD
+      .map(line => {
+        val data = line.split("_")
+        ((data(6), data(2)), 1)
+      })
+      .reduceByKey(_ + _)
+
+    val groupedRDD = reduceRDD
+      .map(data => {
+        (data._1._1, (data._1._2, data._2))
+      })
+      .groupByKey()
+
+    val top10SessionRDD = groupedRDD.mapValues(iter => {
+      iter.toList.sortBy(_._2)(Ordering.Int.reverse).take(10)
+    })
+    val top10sessions = top10SessionRDD.collect()
+    println("top 10 sessions of top 10 categories: \n")
+    top10SessionRDD.foreach(println)
+
+    sc.stop()
+
+  }
+  def topkCategory(
+      rdd: RDD[String],
+      acc: TopkAccumulator
+  ): List[CategoryStats] = {
+
+    // top 10 热门品类
+    rdd.foreach(line => {
       val data = line.split("_")
       if (data(6) != "-1") {
         // 点击事件
@@ -58,9 +103,7 @@ object Topk {
         false
       }
     })
-    results.take(10).foreach(println)
-
-    sc.stop()
+    results.take(10)
 
   }
 }
