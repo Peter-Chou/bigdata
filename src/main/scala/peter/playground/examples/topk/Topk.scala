@@ -3,6 +3,8 @@ package peter.playground.examples.topk
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 import spire.syntax.group
+import org.apache.spark.util.AccumulatorV2
+import scala.collection.mutable
 
 // 按照每个品类的点击、下单、支付的量来统计热门品类
 // 综合排名 = 点击数 × 20% + 下单数 × 30% + 支付数 × 50%
@@ -15,69 +17,113 @@ object Topk {
       new SparkConf().setMaster("local[*]").setAppName("top10")
     val sc: SparkContext = new SparkContext(conf)
 
+    val acc = new TopkAccumulator
+    sc.register(acc, "topkAcc")
+
     val fileRDD = sc.textFile("data/userAction/user_visit_action.txt")
 
-    val clickRDD = fileRDD.filter(line => {
+    fileRDD.foreach(line => {
       val data = line.split("_")
-      data(6) != "-1"
-    })
-    val clickCountRDD = clickRDD
-      .map(line => {
-        val data = line.split("_")
-        (data(6), 1)
-      })
-      .reduceByKey(_ + _)
-
-    val orderRDD = fileRDD.filter(line => {
-      val data = line.split("_")
-      data(8) != "null"
-    })
-    val orderCountRDD = orderRDD
-      .flatMap(line => {
-        val data = line.split("_")
-        val idsString: String = data(8)
-        val cids = idsString.split(",")
-        cids.map(id => (id, 1))
-      })
-      .reduceByKey(_ + _)
-
-    val payRDD = fileRDD.filter(line => {
-      val data = line.split("_")
-      data(10) != "null"
-    })
-    val payCountRDD = payRDD
-      .flatMap(line => {
-        val data = line.split("_")
-        val idsString: String = data(10)
-        val cids = idsString.split(",")
-        cids.map(id => (id, 1))
-      })
-      .reduceByKey(_ + _)
-
-    val cogroupRDD = clickCountRDD.cogroup(orderCountRDD, payCountRDD)
-
-    val analysisRDD = cogroupRDD.mapValues {
-      case (clickIter, orderIter, payIter) => {
-        var clickCnt = 0
-        if (clickIter.iterator.hasNext) {
-          clickCnt = clickIter.iterator.next()
-        }
-        var orderCnt = 0
-        if (orderIter.iterator.hasNext) {
-          orderCnt = orderIter.iterator.next()
-        }
-        var payCnt = 0
-        if (payIter.iterator.hasNext) {
-          payCnt = payIter.iterator.next()
-        }
-        (clickCnt, orderCnt, payCnt)
+      if (data(6) != "-1") {
+        // 点击事件
+        // List((data(6), (1, 0, 0)))
+        acc.add((data(6), "click"))
+      } else if (data(8) != "null") {
+        // 下单事件
+        val cid = data(8).split(",")
+        // cid.map(id => (id, (0, 1, 0)))
+        cid.foreach(id => acc.add(id, "order"))
+      } else if (data(10) != "null") {
+        // 支付事件
+        val cid = data(10).split(",")
+        // cid.map(id => (id, (0, 0, 1)))
+        cid.foreach(id => acc.add(id, "pay"))
       }
-    }
+    })
 
-    val resultRDD = analysisRDD.sortBy(_._2, false).take(10)
-    resultRDD.foreach(println)
+    val categories = acc.value.map(_._2)
+
+    val results = categories.toList.sortWith((left, right) => {
+      if (left.clickCnt > right.clickCnt) {
+        true
+      } else if (left.clickCnt == right.clickCnt) {
+        if (left.orderCnt > right.orderCnt) {
+          true
+        } else if (left.orderCnt == right.orderCnt) {
+          left.payCnt > right.payCnt
+        } else {
+          false
+        }
+      } else {
+        false
+      }
+    })
+    results.take(10).foreach(println)
 
     sc.stop()
 
   }
+}
+
+case class CategoryStats(
+    cid: String,
+    var clickCnt: Int,
+    var orderCnt: Int,
+    var payCnt: Int
+)
+
+// 1. 继承自AccumulatorV2
+//    IN: (品类ID，行为类型)
+//   OUT: (muable.Map[String, CategoryStats])
+class TopkAccumulator
+    extends AccumulatorV2[
+      (String, String),
+      mutable.Map[String, CategoryStats]
+    ] {
+  private var csMap = mutable.Map[String, CategoryStats]()
+
+  override def isZero: Boolean = {
+    csMap.isEmpty
+  }
+
+  override def copy()
+      : AccumulatorV2[(String, String), mutable.Map[String, CategoryStats]] = {
+    new TopkAccumulator()
+  }
+
+  override def reset(): Unit = { csMap.clear() }
+
+  override def add(v: (String, String)): Unit = {
+    val categoryName = v._1
+    val eventType = v._2
+    val category =
+      csMap.getOrElse(categoryName, CategoryStats(categoryName, 0, 0, 0))
+    if (eventType == "click") {
+      category.clickCnt += 1
+    } else if (eventType == "order") {
+      category.orderCnt += 1
+    } else if (eventType == "pay") {
+      category.payCnt += 1
+    }
+    csMap.update(categoryName, category)
+  }
+
+  override def merge(
+      other: AccumulatorV2[(String, String), mutable.Map[String, CategoryStats]]
+  ): Unit = {
+    val map1 = this.csMap
+    val map2 = other.value
+    map2.foreach {
+      case (cName, hc) => {
+        val category = map1.getOrElse(cName, CategoryStats(cName, 0, 0, 0))
+        category.clickCnt += hc.clickCnt
+        category.orderCnt += hc.orderCnt
+        category.payCnt += hc.payCnt
+        map1.update(cName, category)
+      }
+    }
+  }
+
+  override def value: mutable.Map[String, CategoryStats] = csMap
+
 }
