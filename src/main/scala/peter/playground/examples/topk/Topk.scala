@@ -55,11 +55,7 @@ object Topk {
       .reduceByKey(_ + _)
 
     val cogroupRDD = clickCountRDD.cogroup(orderCountRDD, payCountRDD)
-    // .cogroup(payCountRDD)
-    // val analysisRDD = cogroupRDD.map(t => {
-    //   // val id = t._1
-    //   (t._1, (t._2._1, t._2._2, t._2._3))
-    // })
+
     val analysisRDD = cogroupRDD.mapValues {
       case (clickIter, orderIter, payIter) => {
         var clickCnt = 0
