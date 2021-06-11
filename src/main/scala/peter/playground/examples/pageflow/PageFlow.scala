@@ -32,12 +32,13 @@ object PageFlow {
     actionRDD.cache()
 
     // 计算分母
-    val pageCnt = actionRDD
+    val pageCntMap = actionRDD
       .map(action => {
-        (action.page_id, 1)
+        (action.page_id, 1L)
       })
       .reduceByKey(_ + _)
       .collect()
+      .toMap
 
     // 计算分子
     val sessionRDD = actionRDD.groupBy(action => action.session_id)
@@ -49,9 +50,16 @@ object PageFlow {
         val pageFlowIds = flowIds.zip(flowIds.tail)
         pageFlowIds.map(t => (t, 1))
       })
+    val dataRDD = sortRDD.flatMap(_._2).reduceByKey(_ + _)
 
-    // FIXME finish it
-
+    dataRDD.foreach {
+      case ((pageId1, pageId2), jumpCnt) => {
+        val total = pageCntMap.getOrElse(pageId1, 0L)
+        println(
+          s"页面${pageId1} ->页面${pageId1} 的单跳转换率为： " + (jumpCnt.toDouble / total)
+        )
+      }
+    }
     sc.stop()
   }
 }
