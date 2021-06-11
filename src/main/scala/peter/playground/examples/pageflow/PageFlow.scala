@@ -56,7 +56,7 @@ object PageFlow {
       case ((pageId1, pageId2), jumpCnt) => {
         val total = pageCntMap.getOrElse(pageId1, 0L)
         println(
-          s"页面${pageId1} ->页面${pageId1} 的单跳转换率为： " + (jumpCnt.toDouble / total)
+          s"页面${pageId1} ->页面${pageId2} 的单跳转换率为： " + (jumpCnt.toDouble / total)
         )
       }
     }
