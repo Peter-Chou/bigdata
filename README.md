@@ -40,3 +40,9 @@ mvn scala:run -DmainClass=peter.playground.accumulator.longAccumulator.LongAccum
 mvn scala:run -DmainClass=peter.playground.accumulator.customAccumulator.CustomAccumulator
 mvn scala:run -DmainClass=peter.playground.broadcast.Broadcast
 ```
+
+## sql
+
+``` bash
+mvn scala:run -DmainClass=peter.playground.sql.basic.SqlBasic
+```
