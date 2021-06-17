@@ -46,7 +46,7 @@ object SqlBasic {
 
     userDS.show
 
-    spark.stop()
+    spark.close()
   }
 }
 

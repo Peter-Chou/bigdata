@@ -45,4 +45,6 @@ mvn scala:run -DmainClass=peter.playground.broadcast.Broadcast
 
 ``` bash
 mvn scala:run -DmainClass=peter.playground.sql.basic.SqlBasic
+mvn scala:run -DmainClass=peter.playground.sql.udf.UDF
+mvn scala:run -DmainClass=peter.playground.sql.udaf.UDAF
 ```
