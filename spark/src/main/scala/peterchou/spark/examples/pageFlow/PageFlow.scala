@@ -1,4 +1,4 @@
-package peterchou.spark.examples.pageflow
+package peterchou.spark.examples.pageFlow
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext

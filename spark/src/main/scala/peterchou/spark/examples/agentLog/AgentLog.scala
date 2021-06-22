@@ -1,4 +1,4 @@
-package peterchou.spark.examples.agentlog
+package peterchou.spark.examples.agentLog
 
 // 统计 每一个省份每个广告被点击数量的Top 3
 

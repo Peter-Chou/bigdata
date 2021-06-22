@@ -7,9 +7,9 @@ mvn scala:compile
 ## examples
 
 ``` bash
-mvn scala:run -DmainClass=peterchou.spark.examples.wordcount.WordCount
-mvn scala:run -DmainClass=peterchou.spark.examples.agentlog.AgentLog
-mvn scala:run -DmainClass=peterchou.spark.examples.topk.Topk
+mvn scala:run -DmainClass=peterchou.spark.examples.wordCount.WordCount
+mvn scala:run -DmainClass=peterchou.spark.examples.agentLog.AgentLog
+mvn scala:run -DmainClass=peterchou.spark.examples.topK.TopK
 ```
 
 ## transformations

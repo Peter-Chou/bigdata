@@ -1,4 +1,4 @@
-package peterchou.spark.examples.topk
+package peterchou.spark.examples.topK
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
@@ -12,7 +12,7 @@ import scala.collection.mutable
 // 综合排名 = 点击数 × 20% + 下单数 × 30% + 支付数 × 50%
 // 先按照点击数排名，考前的就排名高，如果点击数相同，再比较下单数，下单数相同再比较支付数。
 
-object Topk {
+object TopK {
   def main(args: Array[String]): Unit = {
     val conf: SparkConf =
       new SparkConf().setMaster("local[*]").setAppName("top10")

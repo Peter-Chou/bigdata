@@ -1,4 +1,4 @@
-package peterchou.spark.examples.wordcount
+package peterchou.spark.examples.wordCount
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
