@@ -53,4 +53,5 @@ mvn scala:run -DmainClass=peter.playground.sql.udaf.UDAF
 
 ``` bash
 mvn scala:run -DmainClass=peter.playground.streaming.streamingWordCount.StreamingWordCount
+mvn scala:run -DmainClass=peter.playground.streaming.customReceiver.CustomReceiver
 ```
