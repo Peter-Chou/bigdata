@@ -15,7 +15,7 @@
     <sbt.project.name>flink</sbt.project.name>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <scala.version>${scala.majorVersion}.7</scala.version>
+    <!--<scala.version>${scala.majorVersion}.7</scala.version> -->
   </properties>
   <dependencies>
     <dependency>
