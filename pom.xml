@@ -9,6 +9,7 @@
   <inceptionYear>2021</inceptionYear>
   <modules>
     <module>spark</module>
+    <module>flink</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
