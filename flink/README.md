@@ -1,5 +1,5 @@
 
 
 ``` bash
-mvn scala:run -DmainClass=peter.flink.examples.wordCount.WordCount
+mvn scala:run -DmainClass=peterchou.flink.examples.wordCount.WordCount
 ```
