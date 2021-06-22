@@ -14,7 +14,7 @@ object AgentLog {
     val sc: SparkContext = new SparkContext(conf)
 
     // timestamp province city user ad
-    val fileRDD: RDD[String] = sc.textFile("data/agent", 2)
+    val fileRDD: RDD[String] = sc.textFile("../data/agent", 2)
     val mapRDD = fileRDD.map(row => {
       val data = row.split(" ")
       val key = (data(1), data(4))

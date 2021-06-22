@@ -20,7 +20,7 @@ object UDAF {
 
     spark.udf.register("ageAvg", functions.udaf(new MyAvgUDAF()))
 
-    val df: DataFrame = spark.read.json("data/user.json")
+    val df: DataFrame = spark.read.json("../data/user.json")
     df.createOrReplaceTempView("user")
 
     spark.sql("select ageAvg(age) from user").show

@@ -21,7 +21,7 @@ object Topk {
     val acc = new TopkAccumulator
     sc.register(acc, "topkAcc")
 
-    val fileRDD = sc.textFile("data/userAction/user_visit_action.txt")
+    val fileRDD = sc.textFile("../data/userAction/user_visit_action.txt")
     fileRDD.cache()
 
     val categories = topkCategory(fileRDD, acc)

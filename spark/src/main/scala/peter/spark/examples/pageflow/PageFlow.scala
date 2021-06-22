@@ -9,7 +9,7 @@ object PageFlow {
       new SparkConf().setMaster("local[*]").setAppName("pageFlow")
     val sc: SparkContext = new SparkContext(conf)
 
-    val fileRDD = sc.textFile("data/userAction/user_visit_action.txt")
+    val fileRDD = sc.textFile("../data/userAction/user_visit_action.txt")
 
     val actionRDD = fileRDD.map(line => {
       val data = line.split("_")

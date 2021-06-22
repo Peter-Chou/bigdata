@@ -18,7 +18,7 @@ object SqlBasic {
     // ********** DataFrame *********************
 
     // DataFrame 即 Dataset[Row]
-    val df: DataFrame = spark.read.json("data/user.json")
+    val df: DataFrame = spark.read.json("../data/user.json")
 
     // query by SQL
     // df.createOrReplaceTempView("user")

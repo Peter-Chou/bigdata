@@ -21,7 +21,7 @@ object UDF {
       }
     )
 
-    val df: DataFrame = spark.read.json("data/user.json")
+    val df: DataFrame = spark.read.json("../data/user.json")
 
     df.createOrReplaceTempView("user")
 
