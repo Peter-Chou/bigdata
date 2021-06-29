@@ -1,8 +1,8 @@
-package peterchou.flink.examples.wordCount
+package peterchou.flink.examples.batch.wordCount
 
 import org.apache.flink.api.scala.ExecutionEnvironment
 
-object WordCount {
+object BatchWordCount {
   def main(args: Array[String]): Unit = {
     val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment
     // 引入 flink下的隐式转换
