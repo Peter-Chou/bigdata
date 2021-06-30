@@ -10,4 +10,5 @@ mvn scala:compile
 ``` bash
 # in bigdata/flink
 mvn scala:run -DmainClass=peterchou.flink.examples.batch.wordCount.BatchWordCount
+mvn scala:run -DmainClass=peterchou.flink.examples.stream.wordCount.StreamWordCount
 ```
