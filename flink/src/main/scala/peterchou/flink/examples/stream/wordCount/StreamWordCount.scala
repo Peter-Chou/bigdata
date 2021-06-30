@@ -2,6 +2,7 @@ package peterchou.flink.examples.stream.wordCount
 
 // 引入隐式转换 + 相关的对象
 import org.apache.flink.streaming.api.scala._
+import org.apache.flink.api.java.utils.ParameterTool
 
 object StreamWordCount {
   def main(args: Array[String]): Unit = {
@@ -10,9 +11,14 @@ object StreamWordCount {
       StreamExecutionEnvironment.getExecutionEnvironment
     env.setParallelism(4)
 
+    // 从外部命令中提取参数,作为socket的主机名和端口号
+    val paramTool: ParameterTool = ParameterTool.fromArgs(args)
+    val host: String = paramTool.get("host")
+    val port: Int = paramTool.getInt("port")
+
     // 接受一个socket 文本流
     val inputDataStream: DataStream[String] =
-      env.socketTextStream("localhost", 9999)
+      env.socketTextStream(host, port)
 
     // 进行转换操作
     val resultDataStream: DataStream[(String, Int)] = inputDataStream
