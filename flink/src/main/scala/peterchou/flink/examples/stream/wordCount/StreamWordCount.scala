@@ -9,7 +9,7 @@ object StreamWordCount {
     // 创建流式环境
     val env: StreamExecutionEnvironment =
       StreamExecutionEnvironment.getExecutionEnvironment
-    env.setParallelism(4)
+    // env.setParallelism(4)
 
     // 从外部命令中提取参数,作为socket的主机名和端口号
     val paramTool: ParameterTool = ParameterTool.fromArgs(args)
@@ -26,10 +26,10 @@ object StreamWordCount {
       .filter(_.nonEmpty)
       .map((_, 1))
       // flink 每个算子相互独立，可以独立设置每个算子的并行度
-      .setParallelism(3)
+      // .setParallelism(3)
       .keyBy(0)
       .sum(1)
-      .setParallelism(2)
+      // .setParallelism(2)
 
     resultDataStream.print().setParallelism(1)
 
