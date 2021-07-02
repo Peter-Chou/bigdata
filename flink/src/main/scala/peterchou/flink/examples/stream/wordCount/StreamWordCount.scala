@@ -24,12 +24,13 @@ object StreamWordCount {
     val resultDataStream: DataStream[(String, Int)] = inputDataStream
       .flatMap(_.split(" "))
       .filter(_.nonEmpty)
+      .disableChaining()
       .map((_, 1))
       // flink 每个算子相互独立，可以独立设置每个算子的并行度
       // .setParallelism(3)
       .keyBy(0)
       .sum(1)
-      // .setParallelism(2)
+    // .setParallelism(2)
 
     resultDataStream.print().setParallelism(1)
 
