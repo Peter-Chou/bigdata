@@ -18,14 +18,17 @@ object StreamWordCount {
 
     // 接受一个socket 文本流
     val inputDataStream: DataStream[String] =
-      env.socketTextStream(host, port)
+      env.socketTextStream(host, port).slotSharingGroup("b")
 
     // 进行转换操作
     val resultDataStream: DataStream[(String, Int)] = inputDataStream
       .flatMap(_.split(" "))
+      .slotSharingGroup("a") // flatMap算子在a组里，其他都在共享的b组里
       .filter(_.nonEmpty)
-      .disableChaining()
+      .slotSharingGroup("b")
+      .disableChaining() // 这个算子的前后都断开
       .map((_, 1))
+      .startNewChain() // 这个算子开始新的链，和前面断开
       // flink 每个算子相互独立，可以独立设置每个算子的并行度
       // .setParallelism(3)
       .keyBy(0)
