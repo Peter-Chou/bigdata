@@ -15,6 +15,8 @@ mvn compile
 mvn exec:java -Dexec.mainClass="peterchou.flink.examples.batch.wordCount.BatchWordCount"
 mvn exec:java -Dexec.mainClass="peterchou.flink.examples.stream.wordCount.StreamWordCount" \
 -Dexec.args="--host localhost --port 7777"
+
+mvn exec:java -Dexec.mainClass="peterchou.flink.stream.source.sourceFile.SourceFile"
 ```
 
 ## package
