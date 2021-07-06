@@ -20,6 +20,8 @@ mvn exec:java -Dexec.mainClass="peterchou.flink.stream.source.sourceFile.SourceF
 mvn exec:java -Dexec.mainClass="peterchou.flink.stream.source.sourceKafka.SourceKafka"
 
 mvn exec:java -Dexec.mainClass="peterchou.flink.stream.source.sourceCustom.SourceCustom"
+
+mvn exec:java -Dexec.mainClass="peterchou.flink.stream.transform.base.BaseTransform"
 ```
 
 ## package
