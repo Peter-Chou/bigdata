@@ -17,6 +17,7 @@ mvn exec:java -Dexec.mainClass="peterchou.flink.examples.stream.wordCount.Stream
 -Dexec.args="--host localhost --port 7777"
 
 mvn exec:java -Dexec.mainClass="peterchou.flink.stream.source.sourceFile.SourceFile"
+mvn exec:java -Dexec.mainClass="peterchou.flink.stream.source.sourceKafka.SourceKafka"
 ```
 
 ## package
