@@ -18,6 +18,8 @@ mvn exec:java -Dexec.mainClass="peterchou.flink.examples.stream.wordCount.Stream
 
 mvn exec:java -Dexec.mainClass="peterchou.flink.stream.source.sourceFile.SourceFile"
 mvn exec:java -Dexec.mainClass="peterchou.flink.stream.source.sourceKafka.SourceKafka"
+
+mvn exec:java -Dexec.mainClass="peterchou.flink.stream.source.sourceCustom.SourceCustom"
 ```
 
 ## package
