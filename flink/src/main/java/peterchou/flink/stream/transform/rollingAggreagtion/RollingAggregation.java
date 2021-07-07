@@ -1,12 +1,14 @@
-package peterchou.flink.stream.transform.base;
+package peterchou.flink.stream.transform.rollingAggreagtion;
 
 import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.datastream.KeyedStream;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 import peterchou.flink.stream.beams.sensor.SensorData;
 import peterchou.flink.stream.source.sourceFile.SourceFile.MyMapper;
 
-public class BaseTransform {
+public class RollingAggregation {
   public static void main(String[] args) throws Exception {
 
     StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -14,14 +16,11 @@ public class BaseTransform {
 
     DataStream<String> data = env.readTextFile("../data/sensor.txt");
     DataStream<SensorData> sensorData = data.map(new MyMapper());
-    // sensorData.filter(new FilterFunction<SensorData>() {
 
-    // });
-    DataStream<SensorData> filtered = sensorData.filter((SensorData value) -> {
-      return value.getId().equals("sensor_1");
-    });
+    KeyedStream<SensorData, String> keySensorData = sensorData.keyBy(sensor -> sensor.getId());
+    SingleOutputStreamOperator<SensorData> results = keySensorData.maxBy("temperature");
 
-    filtered.print();
+    results.print("result");
 
     env.execute();
   }

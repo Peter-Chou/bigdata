@@ -22,6 +22,8 @@ mvn exec:java -Dexec.mainClass="peterchou.flink.stream.source.sourceKafka.Source
 mvn exec:java -Dexec.mainClass="peterchou.flink.stream.source.sourceCustom.SourceCustom"
 
 mvn exec:java -Dexec.mainClass="peterchou.flink.stream.transform.base.BaseTransform"
+mvn exec:java -Dexec.mainClass="peterchou.flink.stream.transform.rollingAggreagtion.RollingAggregation"
+mvn exec:java -Dexec.mainClass="peterchou.flink.stream.transform.reduce.ReduceTransform"
 ```
 
 ## package

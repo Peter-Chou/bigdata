@@ -29,6 +29,9 @@ public class SensorData {
     this.temperature = temperature;
   }
 
+  public SensorData() {
+  }
+
   public SensorData(String id, Long timeStamp, Double temperature) {
     this.id = id;
     this.timeStamp = timeStamp;
