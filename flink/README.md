@@ -24,6 +24,7 @@ mvn exec:java -Dexec.mainClass="peterchou.flink.stream.source.sourceCustom.Sourc
 mvn exec:java -Dexec.mainClass="peterchou.flink.stream.transform.base.BaseTransform"
 mvn exec:java -Dexec.mainClass="peterchou.flink.stream.transform.rollingAggreagtion.RollingAggregation"
 mvn exec:java -Dexec.mainClass="peterchou.flink.stream.transform.reduce.ReduceTransform"
+mvn exec:java -Dexec.mainClass="peterchou.flink.stream.transform.richFunction.RichFunction"
 ```
 
 ## package
