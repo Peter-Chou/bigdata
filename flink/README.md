@@ -28,6 +28,8 @@ mvn exec:java -Dexec.mainClass="peterchou.flink.stream.transform.richFunction.Ri
 
 mvn exec:java -Dexec.mainClass="peterchou.flink.stream.sink.kafkaSink.KafkaSink"
 
+mvn exec:java -Dexec.mainClass="peterchou.flink.stream.sink.redisSink.RedisSink"
+
 ```
 
 ## package
