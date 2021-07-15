@@ -31,6 +31,7 @@ mvn exec:java -Dexec.mainClass="peterchou.flink.stream.sink.kafkaSink.KafkaSink"
 mvn exec:java -Dexec.mainClass="peterchou.flink.stream.sink.redisSink.RedisSink"
 mvn exec:java -Dexec.mainClass="peterchou.flink.stream.sink.mysqlSink.MysqlSink"
 
+mvn exec:java -Dexec.mainClass="peterchou.flink.window.timeWindow.TimeWindow"
 ```
 
 ## package
