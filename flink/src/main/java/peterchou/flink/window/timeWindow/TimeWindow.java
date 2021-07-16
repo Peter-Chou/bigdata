@@ -33,7 +33,9 @@ public class TimeWindow {
     // 绘画窗口： session window
     // keyedSensorData.window(EventTimeSessionWindows.withGap(Time.minutes(10)));
     DataStream<Integer> results = sensorData.keyBy(sensor -> sensor.getId())
-        .window(TumblingProcessingTimeWindows.of(Time.seconds(15))).aggregate(new CountAggregateFunction());
+        .window(TumblingProcessingTimeWindows.of(Time.seconds(15))).aggregate(new CountAggregateFunction()); // aggregate
+                                                                                                             // 增强，
+                                                                                                             // apply是全窗口
 
     results.print();
 
