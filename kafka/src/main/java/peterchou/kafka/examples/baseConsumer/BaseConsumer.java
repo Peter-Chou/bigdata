@@ -28,6 +28,7 @@ public class BaseConsumer {
 
     // 不断拉取数据
     while (true) {
+      // 消费者每过5秒拉取一批数据
       ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofSeconds(5));
       for (ConsumerRecord<String, String> record : consumerRecords) {
         String topic = record.topic();
