@@ -12,6 +12,7 @@ import peterchou.flink.stream.beams.sensor.SensorData;
 import peterchou.flink.stream.source.sourceFile.SourceFile.MyMapper;
 
 // DataStream.keyBy() -> KeyedStream.window() -> WindowStream.aggregate() -> Datastream
+// DataStream.windowAll() -> AllWindowStream.aggregate() -> Datastream
 public class TimeWindow {
   public static void main(String[] args) throws Exception {
 
