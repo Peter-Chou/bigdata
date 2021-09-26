@@ -44,7 +44,7 @@ public class TimerProcess {
       // TODO Auto-generated method stub
       lastTempState = getRuntimeContext()
           .getState(new ValueStateDescriptor<Double>("last-temp", Double.class, Double.MIN_VALUE));
-      timerTsState = getRuntimeContext().getState(new ValueStateDescriptor<Long>("timer-ts", Long.class))
+      timerTsState = getRuntimeContext().getState(new ValueStateDescriptor<Long>("timer-ts", Long.class));
     }
 
     @Override
